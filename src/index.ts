@@ -1,17 +1,9 @@
 import { Agent, BedrockModel } from "@strands-agents/sdk"
-import { config } from "dotenv"
-
-config({ path: ".env.local" })
-
-const { REGION, MODEL_ID } = process.env
-
-if (!REGION || !MODEL_ID) {
-  throw new Error("REGION and MODEL_ID must be set in .env.local")
-}
+import { appConfig } from "./config/appConfig.js"
 
 const model = new BedrockModel({
-  region: REGION,
-  modelId: MODEL_ID,
+  region: appConfig.region,
+  modelId: appConfig.modelId,
   maxTokens: 4096,
   temperature: 0.7,
 })
